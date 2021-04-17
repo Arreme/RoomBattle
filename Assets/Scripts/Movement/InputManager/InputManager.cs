@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Events;
 
@@ -11,6 +9,11 @@ public class InputManager : MonoBehaviour
 {
     RoombaImputSystem _input;
     public MoveInputEvent _moveInputEvent;
+    private Vector2 _player1;
+    public Vector2 Player1
+    {
+        get { return _player1; }
+    }
 
     void Awake()
     {
@@ -26,8 +29,7 @@ public class InputManager : MonoBehaviour
 
     private void MovePerformed(InputAction.CallbackContext ctx)
     {
-        Vector2 vector = ctx.ReadValue<Vector2>();
-        _moveInputEvent.Invoke(vector);
+        _player1 = ctx.ReadValue<Vector2>();
     }
 
     private void OnDisable()

@@ -323,9 +323,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56d2b28e234e144428bff6ed31cfce22, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _input: {fileID: 542091972}
   _speed: 15
-  lerp: 0.84
-  maxVel: 10
+  _lerp: 0.9
+  _maxVel: 10
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
