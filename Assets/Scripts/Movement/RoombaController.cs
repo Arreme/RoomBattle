@@ -8,21 +8,40 @@ public class RoombaController : MonoBehaviour
 
 
     [Header("Movement variables")]
-    [SerializeField] private float _speed = 0f;
-    [SerializeField] float _lerp = 0f;
-    [SerializeField] float _maxVel = 0f;
+    [SerializeField] private float _speed = 10f;
+    [SerializeField] float _lerp = 0.7f;
+    [SerializeField] float _maxVel = 10f;
+    [SerializeField] float _linearDrag = 1.4f;
+    [SerializeField] bool _boosting = false;
 
     private void Awake()
     {
         _phy = gameObject.GetComponent<CustomPhysics>();
         _phy.MaxSpeed = _maxVel;
+        _phy.LinearDrag = _linearDrag;
+        _input.Boost += Boost;
     }
 
     void FixedUpdate()
     {
         _vector = _input.Player1;
-        _phy.addForce(_vector , _speed);
-        transform.up = Vector2.Lerp(bisector(_vector, transform.up), transform.up, _lerp);
+        if (_boosting)
+        {
+            _phy.MaxSpeed = _maxVel * 4f;
+            _speed = Mathf.Min(_maxVel*10,_speed*1.2f);
+            _phy.addForce(bisector(_vector, transform.up), _speed);
+            transform.up = Vector2.Lerp(bisector(_vector, transform.up), transform.up, _lerp/1.2f);
+        } else
+        {
+            _speed = 15f;
+            _phy.addForce(_vector, _speed);
+            transform.up = Vector2.Lerp(bisector(_vector, transform.up), transform.up, _lerp);
+        }
+    }
+
+    private void Boost()
+    {
+        _boosting = !_boosting;
     }
 
     private Vector2 bisector(Vector2 a, Vector2 b)
@@ -33,4 +52,6 @@ public class RoombaController : MonoBehaviour
         }
         return (b.magnitude * a + a.magnitude * b).normalized;
     }
+
+
 }

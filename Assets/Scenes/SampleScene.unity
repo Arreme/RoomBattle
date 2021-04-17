@@ -217,6 +217,7 @@ GameObject:
   - component: {fileID: 118830054}
   - component: {fileID: 118830057}
   - component: {fileID: 118830056}
+  - component: {fileID: 118830058}
   m_Layer: 0
   m_Name: New Sprite
   m_TagString: Untagged
@@ -264,7 +265,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 40f79b2806912874a98b495600f8b62c, type: 3}
+  m_Sprite: {fileID: -2413806693520163455, guid: f5675b3db4f3f4741bc5fbd56e8147e3, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -322,6 +323,22 @@ MonoBehaviour:
   _speed: 15
   _lerp: 0.7
   _maxVel: 10
+--- !u!58 &118830058
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 118830053}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.5
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0

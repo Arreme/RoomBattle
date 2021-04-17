@@ -14,13 +14,21 @@ public class CustomPhysics : MonoBehaviour
     [SerializeField] private Vector2 _position = Vector2.zero;
     private Transform _tr;
 
-    private float _maxSpeed = 0f;
+    [SerializeField]private float _maxSpeed = 0f;
     public float MaxSpeed
     {
         get { return _maxSpeed; }
         set
         {
             _maxSpeed = value < 0 ? 0 : value;
+        }
+    }
+    public float LinearDrag
+    {
+        get { return _linearDrag; }
+        set
+        {
+            _linearDrag = value < 0 ? 0 : value;
         }
     }
 
@@ -38,6 +46,7 @@ public class CustomPhysics : MonoBehaviour
         _velocity = Vector2.ClampMagnitude(_velocity,_maxSpeed);
         float linearDrag = Mathf.Exp(-_linearDrag * Time.deltaTime / _mass);
         _velocity = _velocity * linearDrag;
+        _maxSpeed = Mathf.Max(10, Mathf.Min(_velocity.magnitude, _maxSpeed));
         _position += finalPosition(_velocity);
         _tr.position = _position;
     }
@@ -52,11 +61,6 @@ public class CustomPhysics : MonoBehaviour
     {
         //x = x0 + v*t
         return v * Time.deltaTime;
-    }
-
-    public float vectorDistance(float a, float b)
-    {
-        return Mathf.Sqrt((a * a) - (b * b));
     }
 
     public bool linearDependency(Vector2 a, Vector2 b)
