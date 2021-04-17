@@ -8,45 +8,60 @@ using UnityEngine;
  */
 public class CustomPhysics : MonoBehaviour
 {
-    [SerializeField] private float mass;
-    private Vector2 velocity = Vector2.zero;
-    private Vector2 position = Vector2.zero;
-    private Vector2 force = Vector2.zero;
-
+    [SerializeField] private float _mass = 1f;
+    [SerializeField] private float _linearDrag = 0.02f;
+    [SerializeField] private Vector2 _velocity = Vector2.zero;
+    [SerializeField] private Vector2 _position = Vector2.zero;
     private Transform _tr;
+
+    private float _maxSpeed = 0f;
+    public float MaxSpeed
+    {
+        get { return _maxSpeed; }
+        set
+        {
+            _maxSpeed = value < 0 ? 0 : value;
+        }
+    }
+
+    
     private void Awake()
     {
         _tr = gameObject.GetComponent<Transform>();
     }
 
-    public void addForce(Vector2 force)
+    public void addForce(Vector2 direction,float speed)
     {
         //F = m * a, a = F/m
-        Vector2 a = force / mass;
-        velocity += finalVelocity(a);
-        position += finalPosition(velocity);
-        _tr.position = position;
+        Vector2 a = direction*speed / _mass;
+        _velocity += finalVelocity(a);
+        _velocity = Vector2.ClampMagnitude(_velocity,_maxSpeed);
+        float linearDrag = Mathf.Exp(-_linearDrag * Time.deltaTime / _mass);
+        _velocity = _velocity * linearDrag;
+        _position += finalPosition(_velocity);
+        _tr.position = _position;
     }
 
     public Vector2 finalVelocity(Vector2 a)
     {
         //vel = v0 + a*t
-        return velocity + a*Time.deltaTime;
+        return a*Time.deltaTime;
     }
 
     public Vector2 finalPosition(Vector2 v)
     {
         //x = x0 + v*t
-        return position + v * Time.deltaTime;
+        return v * Time.deltaTime;
     }
 
-    public float vectorDistance(Vector2 a)
+    public float vectorDistance(float a, float b)
     {
-        return Mathf.Sqrt((a.x * a.x) + (a.y * a.y));
+        return Mathf.Sqrt((a * a) - (b * b));
     }
 
     public bool linearDependency(Vector2 a, Vector2 b)
     {
-        return (a.x * b.x) + (a.y * b.y) == 0;
+        return (a.x * b.x) + (a.y * b.y) != 0;
     }
+
 }

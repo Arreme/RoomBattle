@@ -2,13 +2,9 @@
 using UnityEngine.InputSystem;
 using UnityEngine.Events;
 
-[System.Serializable]
-public class MoveInputEvent : UnityEvent<Vector2> { }
-
 public class InputManager : MonoBehaviour
 {
     RoombaImputSystem _input;
-    public MoveInputEvent _moveInputEvent;
     private Vector2 _player1;
     public Vector2 Player1
     {

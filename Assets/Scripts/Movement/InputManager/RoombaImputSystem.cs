@@ -1,4 +1,4 @@
-// GENERATED AUTOMATICALLY FROM 'Assets/Scripts/Movement/RoombaImputSystem.inputactions'
+// GENERATED AUTOMATICALLY FROM 'Assets/Scripts/Movement/InputManager/RoombaImputSystem.inputactions'
 
 using System;
 using System.Collections;
