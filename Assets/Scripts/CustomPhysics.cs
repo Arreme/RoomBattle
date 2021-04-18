@@ -8,13 +8,12 @@ using UnityEngine;
  */
 public class CustomPhysics : MonoBehaviour
 {
-    [SerializeField] private float _mass = 1f;
-    [SerializeField] private float _linearDrag = 0.02f;
+    private float _mass = 1f;
+    private float _linearDrag = 0.02f;
     [SerializeField] private Vector2 _velocity = Vector2.zero;
     [SerializeField] private Vector2 _position = Vector2.zero;
-    private Transform _tr;
 
-    [SerializeField]private float _maxSpeed = 0f;
+    private float _maxSpeed = 0f;
     public float MaxSpeed
     {
         get { return _maxSpeed; }
@@ -35,7 +34,7 @@ public class CustomPhysics : MonoBehaviour
     
     private void Awake()
     {
-        _tr = gameObject.GetComponent<Transform>();
+        _position = transform.position;
     }
 
     public void addForce(Vector2 direction,float speed)
@@ -48,7 +47,7 @@ public class CustomPhysics : MonoBehaviour
         _velocity = _velocity * linearDrag;
         _maxSpeed = Mathf.Max(10, Mathf.Min(_velocity.magnitude, _maxSpeed));
         _position += finalPosition(_velocity);
-        _tr.position = _position;
+        transform.position = _position;
     }
 
     public Vector2 finalVelocity(Vector2 a)

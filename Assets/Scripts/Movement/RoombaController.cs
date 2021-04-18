@@ -6,6 +6,8 @@ public class RoombaController : MonoBehaviour
     private CustomPhysics _phy;
     [SerializeField] private InputManager _input;
 
+    public enum Players { Player1, Player2, Player3, Player4 }
+    public Players players;
 
     [Header("Movement variables")]
     [SerializeField] private float _speed = 10f;
@@ -19,18 +21,41 @@ public class RoombaController : MonoBehaviour
         _phy = gameObject.GetComponent<CustomPhysics>();
         _phy.MaxSpeed = _maxVel;
         _phy.LinearDrag = _linearDrag;
-        _input.Boost += Boost;
+        switch(players)
+        {
+            case Players.Player1:
+                _input.P1Boost += Boost;
+                break;
+            case Players.Player2:
+                _input.P2Boost += Boost;
+                break;
+            default:
+                break;
+        }
+        
     }
 
     void FixedUpdate()
     {
-        _vector = _input.Player1;
+        switch (players)
+        {
+            case Players.Player1:
+                _vector = _input.Player1;
+                break;
+            case Players.Player2:
+                _vector = _input.Player2;
+                break;
+            default:
+                break;
+        }
+
         if (_boosting)
         {
             _phy.MaxSpeed = _maxVel * 4f;
             _speed = Mathf.Min(_maxVel*10,_speed*1.2f);
+            transform.up = Vector2.Lerp(bisector(_vector, transform.up), transform.up, _lerp / 1.2f);
             _phy.addForce(bisector(_vector, transform.up), _speed);
-            transform.up = Vector2.Lerp(bisector(_vector, transform.up), transform.up, _lerp/1.2f);
+            
         } else
         {
             _speed = 15f;
