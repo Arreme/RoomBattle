@@ -14,20 +14,21 @@ public class RoombaController : MonoBehaviour
 
     [Header("Movement variables")]
     [SerializeField] private float _speed = 10f;
-    [SerializeField] float _lerp = 0.7f;
     [SerializeField] float _maxVel = 10f;
     [SerializeField] float _linearDrag = 1.4f;
+    [SerializeField] float _angularDrag = 0.05f;
+    [SerializeField] float _rotateSpeed = 2.5f;
     
     [Header("Boosting variables")]
     [SerializeField] private float _boostMaxSpeed = 40f;
     [SerializeField] private float _boostIncrement = 1.15f;
-    [SerializeField] private float _boostLerpSpeed = 0.84f;
 
     private void Start()
     {
         _phy = gameObject.GetComponent<CustomPhysics>();
         _phy.MaxSpeed = _maxVel;
         _phy.LinearDrag = _linearDrag;
+        _phy.AngularDrag = _angularDrag;
         switch(players)
         {
             case Players.Player1:
@@ -62,12 +63,19 @@ public class RoombaController : MonoBehaviour
         {
             _phy.MaxSpeed = _boostMaxSpeed;
             _currentSpeed = Mathf.Min(_boostMaxSpeed, _currentSpeed * _boostIncrement);
-            //transform.up = Vector2.Lerp(bisector(_vector, transform.up), transform.up, _boostLerpSpeed);
+            if (_vector != Vector2.zero)
+            {
+                _phy.addTorque(bisector(_vector, transform.up) * _rotateSpeed, 1);
+            }
         }
         else
         {
             _currentSpeed = _speed;
-            //transform.up = Vector2.Lerp(bisector(_vector, transform.up), transform.up, _lerp);
+            if (_vector != Vector2.zero)
+            {
+                _phy.addTorque(bisector(_vector,transform.up)*_rotateSpeed, 1);
+            }
+            
         }
         moveRoomba(_currentSpeed);
     }
