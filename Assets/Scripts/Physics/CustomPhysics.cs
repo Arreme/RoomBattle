@@ -122,7 +122,6 @@ public class CustomPhysics : MonoBehaviour, IPhysicalObject
         float linearDrag = Mathf.Exp(-_linearDrag * Time.deltaTime / _mass);
         _velocity = _velocity * linearDrag;
         _maxSpeed = Mathf.Max(10, Mathf.Min(_velocity.magnitude, _maxSpeed));
-        _rigibody.velocity = :)
         if (movementRestriction != Vector2.zero)
         {
             float dotX = Vector2.Dot(movementRestriction, new Vector2(_velocity.x, 0));
