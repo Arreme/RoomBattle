@@ -9,14 +9,21 @@ public class RoombaController : MonoBehaviour
     public enum Players { Player1, Player2, Player3, Player4 }
     public Players players;
 
+    [SerializeField] bool _boosting = false;
+    private float _currentSpeed;
+
     [Header("Movement variables")]
     [SerializeField] private float _speed = 10f;
     [SerializeField] float _lerp = 0.7f;
     [SerializeField] float _maxVel = 10f;
     [SerializeField] float _linearDrag = 1.4f;
-    [SerializeField] bool _boosting = false;
+    
+    [Header("Boosting variables")]
+    [SerializeField] private float _boostMaxSpeed = 40f;
+    [SerializeField] private float _boostIncrement = 1.15f;
+    [SerializeField] private float _boostLerpSpeed = 0.84f;
 
-    private void Awake()
+    private void Start()
     {
         _phy = gameObject.GetComponent<CustomPhysics>();
         _phy.MaxSpeed = _maxVel;
@@ -49,26 +56,33 @@ public class RoombaController : MonoBehaviour
                 break;
         }
 
+        Debug.DrawLine(transform.position + Vector3.zero, transform.position + transform.up, Color.red);
+        Debug.DrawLine(transform.position + Vector3.zero, transform.position +  new Vector3(_vector.x, _vector.y, 0), Color.green);
         if (_boosting)
         {
-            _phy.MaxSpeed = _maxVel * 4f;
-            _speed = Mathf.Min(_maxVel*10,_speed*1.2f);
-            transform.up = Vector2.Lerp(bisector(_vector, transform.up), transform.up, _lerp / 1.2f);
-            _phy.addForce(bisector(_vector, transform.up), _speed);
-            
-        } else
-        {
-            _speed = 15f;
-            _phy.addForce(_vector, _speed);
-            transform.up = Vector2.Lerp(bisector(_vector, transform.up), transform.up, _lerp);
+            _phy.MaxSpeed = _boostMaxSpeed;
+            _currentSpeed = Mathf.Min(_boostMaxSpeed, _currentSpeed * _boostIncrement);
+            //transform.up = Vector2.Lerp(bisector(_vector, transform.up), transform.up, _boostLerpSpeed);
         }
+        else
+        {
+            _currentSpeed = _speed;
+            //transform.up = Vector2.Lerp(bisector(_vector, transform.up), transform.up, _lerp);
+        }
+        moveRoomba(_currentSpeed);
     }
 
+    private void moveRoomba(float currentSpeed)
+    {
+        _phy.addForce(_vector, currentSpeed);
+    }
     private void Boost()
     {
         _boosting = !_boosting;
+        if (_boosting) _currentSpeed = _speed;
     }
 
+    #region(UtilityFunctions)
     private Vector2 bisector(Vector2 a, Vector2 b)
     {
         if (_phy.linearDependency(a,b))
@@ -77,6 +91,5 @@ public class RoombaController : MonoBehaviour
         }
         return (b.magnitude * a + a.magnitude * b).normalized;
     }
-
-
+    #endregion
 }

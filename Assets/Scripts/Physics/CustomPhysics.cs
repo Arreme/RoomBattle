@@ -6,14 +6,18 @@ using UnityEngine;
  * Determina la següent posició del Roomba o d'un objecte amb una massa
  * determinada
  */
-public class CustomPhysics : MonoBehaviour
+public class CustomPhysics : MonoBehaviour, IPhysicalObject
 {
-    private float _mass = 1f;
-    private float _linearDrag = 0.02f;
-    [SerializeField] private Vector2 _velocity = Vector2.zero;
-    [SerializeField] private Vector2 _position = Vector2.zero;
+    [SerializeField] private PhysicsManager _manager;
 
-    private float _maxSpeed = 0f;
+    
+    [SerializeField] private Vector2 _velocity = Vector2.zero;
+    [SerializeField] private Vector3 _position = Vector3.zero;
+    [SerializeField] private Vector2 _force = Vector2.zero;
+
+    [SerializeField] private float _mass = 1f;
+    [SerializeField] private float _linearDrag = 0.02f;
+    [SerializeField] private float _maxSpeed = 0f;
     public float MaxSpeed
     {
         get { return _maxSpeed; }
@@ -32,31 +36,48 @@ public class CustomPhysics : MonoBehaviour
     }
 
     
-    private void Awake()
+    private void Start()
     {
         _position = transform.position;
+        _manager.PhysicsSubscribe(this);
     }
 
-    public void addForce(Vector2 direction,float speed)
+    public void Step()
     {
         //F = m * a, a = F/m
-        Vector2 a = direction*speed / _mass;
+        Vector2 a = _force / _mass;
+        _force = Vector2.zero;
+
         _velocity += finalVelocity(a);
-        _velocity = Vector2.ClampMagnitude(_velocity,_maxSpeed);
+        _velocity = Vector2.ClampMagnitude(_velocity, _maxSpeed);
+
         float linearDrag = Mathf.Exp(-_linearDrag * Time.deltaTime / _mass);
         _velocity = _velocity * linearDrag;
         _maxSpeed = Mathf.Max(10, Mathf.Min(_velocity.magnitude, _maxSpeed));
+
         _position += finalPosition(_velocity);
         transform.position = _position;
     }
 
+    public void addForce(Vector2 direction,float newtons)
+    {
+        _force = direction * newtons;
+    }
+
+    public void addTorque(float force)
+    {
+
+    }
+
+
+    #region(UtilityFunctions)
     public Vector2 finalVelocity(Vector2 a)
     {
         //vel = v0 + a*t
         return a*Time.deltaTime;
     }
 
-    public Vector2 finalPosition(Vector2 v)
+    public Vector3 finalPosition(Vector2 v)
     {
         //x = x0 + v*t
         return v * Time.deltaTime;
@@ -66,5 +87,6 @@ public class CustomPhysics : MonoBehaviour
     {
         return (a.x * b.x) + (a.y * b.y) != 0;
     }
+    #endregion
 
 }
