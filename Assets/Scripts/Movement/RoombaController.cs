@@ -15,20 +15,17 @@ public class RoombaController : MonoBehaviour
     [Header("Movement variables")]
     [SerializeField] private float _speed = 10f;
     [SerializeField] float _maxVel = 10f;
-    [SerializeField] float _linearDrag = 1.4f;
-    [SerializeField] float _angularDrag = 0.05f;
     [SerializeField] float _rotateSpeed = 2.5f;
-    
+
     [Header("Boosting variables")]
     [SerializeField] private float _boostMaxSpeed = 40f;
-    [SerializeField] private float _boostIncrement = 1.15f;
+    [SerializeField] private float _boostIncrement = 1.10f;
 
     private void Start()
     {
+        _currentSpeed = _speed;
         _phy = gameObject.GetComponent<CustomPhysics>();
         _phy.MaxSpeed = _maxVel;
-        _phy.LinearDrag = _linearDrag;
-        _phy.AngularDrag = _angularDrag;
         switch(players)
         {
             case Players.Player1:
@@ -59,22 +56,17 @@ public class RoombaController : MonoBehaviour
 
         Debug.DrawLine(transform.position + Vector3.zero, transform.position + transform.up, Color.red);
         Debug.DrawLine(transform.position + Vector3.zero, transform.position +  new Vector3(_vector.x, _vector.y, 0), Color.green);
+        Debug.DrawLine(transform.position + Vector3.zero, transform.position + new Vector3(bisector(_vector, transform.up).x, bisector(_vector, transform.up).y), Color.blue);
         if (_boosting)
         {
             _phy.MaxSpeed = _boostMaxSpeed;
             _currentSpeed = Mathf.Min(_boostMaxSpeed, _currentSpeed * _boostIncrement);
-            if (_vector != Vector2.zero)
-            {
-                _phy.addTorque(bisector(_vector, transform.up) * _rotateSpeed, 1);
-            }
+            _phy.addTorque(bisector(_vector, transform.up) * _rotateSpeed);
         }
         else
         {
             _currentSpeed = _speed;
-            if (_vector != Vector2.zero)
-            {
-                _phy.addTorque(bisector(_vector,transform.up)*_rotateSpeed, 1);
-            }
+            _phy.addTorque(bisector(_vector, transform.up) * _rotateSpeed);
             
         }
         moveRoomba(_currentSpeed);
@@ -87,7 +79,6 @@ public class RoombaController : MonoBehaviour
     private void Boost()
     {
         _boosting = !_boosting;
-        if (_boosting) _currentSpeed = _speed;
     }
 
     #region(UtilityFunctions)
