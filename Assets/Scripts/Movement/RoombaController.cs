@@ -70,6 +70,11 @@ public class RoombaController : MonoBehaviour
             
         }
         moveRoomba(_currentSpeed);
+
+        if(transform.childCount <= 1)
+        {
+            Destroy(gameObject);
+        }
     }
 
     private void moveRoomba(float currentSpeed)
