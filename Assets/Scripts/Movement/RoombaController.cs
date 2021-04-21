@@ -64,6 +64,11 @@ public class RoombaController : MonoBehaviour
             _boostFuel = Mathf.Min(_boostFuel + Time.deltaTime, _maxFuel);
         }
         moveRoomba(_currentSpeed);
+
+        if(transform.childCount <= 1)
+        {
+            Destroy(gameObject);
+        }
     }
 
     private void ChooseVectorPlayer()
