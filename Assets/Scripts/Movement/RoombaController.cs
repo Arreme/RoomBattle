@@ -10,6 +10,8 @@ public class RoombaController : MonoBehaviour
     public Players players;
 
     [SerializeField] bool _boosting = false;
+    [SerializeField] float _maxFuel = 2f;
+    [SerializeField] float _boostFuel = 2f;
     private float _currentSpeed;
 
     [Header("Movement variables")]
@@ -42,6 +44,30 @@ public class RoombaController : MonoBehaviour
 
     void FixedUpdate()
     {
+        ChooseVectorPlayer();
+
+        Debug.DrawLine(transform.position + Vector3.zero, transform.position + transform.up, Color.red);
+        Debug.DrawLine(transform.position + Vector3.zero, transform.position + new Vector3(_vector.x, _vector.y, 0), Color.green);
+        Debug.DrawLine(transform.position + Vector3.zero, transform.position + new Vector3(bisector(_vector, transform.up).x, bisector(_vector, transform.up).y), Color.blue);
+        
+        if (_boosting && _boostFuel > 0)
+        { 
+            _phy.MaxSpeed = _boostMaxSpeed;
+            _currentSpeed = Mathf.Min(_boostMaxSpeed, _currentSpeed * _boostIncrement);
+            _phy.addTorque(bisector(_vector, transform.up) * _rotateSpeed);
+            _boostFuel = Mathf.Max(_boostFuel - Time.deltaTime, 0);
+        }
+        else
+        {
+            _currentSpeed = _speed;
+            _phy.addTorque(bisector(_vector, transform.up) * _rotateSpeed);
+            _boostFuel = Mathf.Min(_boostFuel + Time.deltaTime, _maxFuel);
+        }
+        moveRoomba(_currentSpeed);
+    }
+
+    private void ChooseVectorPlayer()
+    {
         switch (players)
         {
             case Players.Player1:
@@ -53,23 +79,6 @@ public class RoombaController : MonoBehaviour
             default:
                 break;
         }
-
-        Debug.DrawLine(transform.position + Vector3.zero, transform.position + transform.up, Color.red);
-        Debug.DrawLine(transform.position + Vector3.zero, transform.position +  new Vector3(_vector.x, _vector.y, 0), Color.green);
-        Debug.DrawLine(transform.position + Vector3.zero, transform.position + new Vector3(bisector(_vector, transform.up).x, bisector(_vector, transform.up).y), Color.blue);
-        if (_boosting)
-        {
-            _phy.MaxSpeed = _boostMaxSpeed;
-            _currentSpeed = Mathf.Min(_boostMaxSpeed, _currentSpeed * _boostIncrement);
-            _phy.addTorque(bisector(_vector, transform.up) * _rotateSpeed);
-        }
-        else
-        {
-            _currentSpeed = _speed;
-            _phy.addTorque(bisector(_vector, transform.up) * _rotateSpeed);
-            
-        }
-        moveRoomba(_currentSpeed);
     }
 
     private void moveRoomba(float currentSpeed)
