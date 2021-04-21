@@ -9,11 +9,11 @@ using UnityEngine;
  */
 public class CustomPhysics : MonoBehaviour
 {
-    private Rigidbody2D _rb;
+    private Rigidbody _rb;
 
-    [SerializeField] private Vector2 _force = Vector2.zero;
-    [SerializeField] private float _maxSpeed = 0f;
-    private Vector2 _angularForce;
+    private Vector2 _force = Vector2.zero;
+    private float _maxSpeed = 0f;
+    private Vector2 _angularForce = Vector2.zero;
 
     public float MaxSpeed
     {
@@ -26,9 +26,9 @@ public class CustomPhysics : MonoBehaviour
 
     private void Start()
     {
-        _rb = gameObject.GetComponent<Rigidbody2D>();
+        _rb = gameObject.GetComponent<Rigidbody>();
         _rb.position = transform.position;
-        _rb.rotation = transform.rotation.eulerAngles.z;
+        _rb.rotation = transform.rotation;
         _rb.centerOfMass = Vector2.zero;
     }
 
@@ -43,8 +43,9 @@ public class CustomPhysics : MonoBehaviour
     {
         if (_angularForce != Vector2.zero)
         {
-            _rb.angularVelocity = _angularForce.magnitude * Vector2.Dot(_angularForce, -transform.right) / _rb.mass;
-            _angularForce = Vector2.zero;
+            Vector2 right = new Vector2(transform.right.x,transform.right.z);
+            _rb.angularVelocity = new Vector3(0,_angularForce.magnitude * Vector2.Dot(_angularForce, right) / _rb.mass,0);
+            _angularForce = Vector3.zero;
         }
     }
 
@@ -58,11 +59,10 @@ public class CustomPhysics : MonoBehaviour
 
     private void LinearMovement()
     {
-        Vector2 a = _force / _rb.mass;
+        Vector3 a = new Vector3(_force.x,0,_force.y) / _rb.mass;
         _force = Vector2.zero;
-
         _rb.velocity += finalVelocity(a);
-        _rb.velocity = Vector2.ClampMagnitude(_rb.velocity, _maxSpeed);
+        _rb.velocity = Vector3.ClampMagnitude(_rb.velocity, _maxSpeed);
         _maxSpeed = Mathf.Max(10, Mathf.Min(_rb.velocity.magnitude, _maxSpeed));
     }
 
@@ -71,7 +71,7 @@ public class CustomPhysics : MonoBehaviour
         _force = direction * newtons;
     }
 
-    public Vector2 finalVelocity(Vector2 a)
+    public Vector3 finalVelocity(Vector3 a)
     {
         //vel = v0 + a*t
         return a*Time.deltaTime;
@@ -81,5 +81,11 @@ public class CustomPhysics : MonoBehaviour
     public bool linearDependency(Vector2 a, Vector2 b)
     {
         return (a.x * b.x) + (a.y * b.y) != 0;
+    }
+
+    private void LateUpdate()
+    {
+        transform.localEulerAngles = new Vector3(0, transform.localEulerAngles.y, 0);
+        _rb.angularVelocity = new Vector3(0, _rb.angularVelocity.y, 0);
     }
 }

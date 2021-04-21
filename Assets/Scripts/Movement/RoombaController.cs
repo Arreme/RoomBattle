@@ -2,7 +2,7 @@
 
 public class RoombaController : MonoBehaviour
 {
-    private Vector2 _vector = Vector2.zero;
+    private Vector3 _vector = Vector3.zero;
     private CustomPhysics _phy;
     [SerializeField] private InputManager _input;
 
@@ -46,21 +46,19 @@ public class RoombaController : MonoBehaviour
     {
         ChooseVectorPlayer();
 
-        Debug.DrawLine(transform.position + Vector3.zero, transform.position + transform.up, Color.red);
-        Debug.DrawLine(transform.position + Vector3.zero, transform.position + new Vector3(_vector.x, _vector.y, 0), Color.green);
-        Debug.DrawLine(transform.position + Vector3.zero, transform.position + new Vector3(bisector(_vector, transform.up).x, bisector(_vector, transform.up).y), Color.blue);
+        Vector2 forward = new Vector2(transform.forward.x, transform.forward.z);
         
         if (_boosting && _boostFuel > 0)
         { 
             _phy.MaxSpeed = _boostMaxSpeed;
             _currentSpeed = Mathf.Min(_boostMaxSpeed, _currentSpeed * _boostIncrement);
-            _phy.addTorque(bisector(_vector, transform.up) * _rotateSpeed);
+            _phy.addTorque(bisector(_vector, forward) * _rotateSpeed);
             _boostFuel = Mathf.Max(_boostFuel - Time.deltaTime, 0);
         }
         else
         {
             _currentSpeed = _speed;
-            _phy.addTorque(bisector(_vector, transform.up) * _rotateSpeed);
+            _phy.addTorque(bisector(_vector, forward) * _rotateSpeed);
             _boostFuel = Mathf.Min(_boostFuel + Time.deltaTime, _maxFuel);
         }
         moveRoomba(_currentSpeed);
