@@ -949,10 +949,8 @@ MonoBehaviour:
   _maxVel: 10
   _rotateSpeed: 6
   _boosting: 0
-  _maxFuel: 2
-  _boostFuel: 2
-  _boostMaxSpeed: 40
-  _boostIncrement: 1.15
+  _boostTime: 0.3
+  _boostMaxSpeed: 120
 --- !u!114 &1979134653
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -4,12 +4,6 @@ public class RoombaController : MonoBehaviour
 {
     public CustomPhysics _phy;
     [SerializeField] private InputManager _input;
-
-    private RoombaState _currentState;
-
-    public BoostingState _boostingState = new BoostingState();
-    public NormalState _normalState = new NormalState();
-
     public enum Players { Player1, Player2, Player3, Player4 }
     public Players players;
 
@@ -21,16 +15,20 @@ public class RoombaController : MonoBehaviour
 
     [Header("Boosting variables")]
     public bool _boosting = false;
-    [SerializeField] float _maxFuel = 2f;
-    [SerializeField] float _boostFuel = 2f;
+    [SerializeField] float _boostTime = 2f;
     [SerializeField] private float _boostMaxSpeed = 40f;
-    [SerializeField] private float _boostIncrement = 1.10f;
+
+    private RoombaState _currentState;
+
+    public BoostingState _boostingState;
+    public NormalState _normalState;
 
     private void Start()
     {
         _phy = gameObject.GetComponent<CustomPhysics>();
-
-        switch(players)
+        _normalState = new NormalState(_speed, _maxVel, _rotateSpeed);
+        _boostingState = new BoostingState(_boostTime,_boostMaxSpeed);
+        switch (players)
         {
             case Players.Player1:
                 _input.P1Boost += Boost;
@@ -47,6 +45,7 @@ public class RoombaController : MonoBehaviour
 
     void FixedUpdate()
     {
+        ChooseVectorPlayer();
         _currentState = _currentState.runFrame(this);
     }
 
@@ -65,10 +64,6 @@ public class RoombaController : MonoBehaviour
         }
     }
 
-    private void moveRoomba(float currentSpeed)
-    {
-        _phy.addForce(_inputVector, currentSpeed);
-    }
     private void Boost()
     {
         _boosting = !_boosting;

@@ -4,15 +4,23 @@ public class NormalState : RoombaState
 {
     public float _speed;
     public float _maxVel;
+    public float _rotateSpeed;
 
+    public NormalState(float speed, float maxVel, float rotateSpeed)
+    {
+        _speed = speed;
+        _maxVel = maxVel;
+        _rotateSpeed = rotateSpeed;
+    }
 
     public RoombaState runFrame(RoombaController controller)
     {
         controller._phy.MaxSpeed = _maxVel;
-        controller._phy.addTorque(bisector(controller._inputVector,new Vector2(controller.transform.forward.x,controller.transform.forward.z)));
+        controller._phy.addTorque(bisector(controller._inputVector,new Vector2(controller.transform.forward.x,controller.transform.forward.z))*_rotateSpeed);
+        controller._phy.addForce(controller._inputVector, _speed);
         if (controller._boosting)
         {
-            return controller._boostingState;
+            return controller._boostingState.reset(new Vector2(controller.transform.forward.x, controller.transform.forward.z));
         } else
         {
             return controller._normalState;
