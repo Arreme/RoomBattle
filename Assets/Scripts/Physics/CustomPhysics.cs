@@ -78,8 +78,9 @@ public class CustomPhysics : MonoBehaviour
     }
     #endregion
 
-    public bool linearDependency(Vector2 a, Vector2 b)
+    public void LateUpdate()
     {
-        return (a.x * b.x) + (a.y * b.y) != 0;
+        _rb.angularVelocity = new Vector3(0, _rb.angularVelocity.y, 0);
+        transform.localEulerAngles = new Vector3(0, transform.localEulerAngles.y, 0);
     }
 }

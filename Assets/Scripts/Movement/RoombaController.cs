@@ -2,32 +2,34 @@
 
 public class RoombaController : MonoBehaviour
 {
-    private Vector3 _vector = Vector3.zero;
-    private CustomPhysics _phy;
+    public CustomPhysics _phy;
     [SerializeField] private InputManager _input;
+
+    private RoombaState _currentState;
+
+    public BoostingState _boostingState = new BoostingState();
+    public NormalState _normalState = new NormalState();
 
     public enum Players { Player1, Player2, Player3, Player4 }
     public Players players;
 
-    [SerializeField] bool _boosting = false;
-    [SerializeField] float _maxFuel = 2f;
-    [SerializeField] float _boostFuel = 2f;
-    private float _currentSpeed;
-
     [Header("Movement variables")]
+    public Vector3 _inputVector = Vector3.zero;
     [SerializeField] private float _speed = 10f;
     [SerializeField] float _maxVel = 10f;
     [SerializeField] float _rotateSpeed = 2.5f;
 
     [Header("Boosting variables")]
+    public bool _boosting = false;
+    [SerializeField] float _maxFuel = 2f;
+    [SerializeField] float _boostFuel = 2f;
     [SerializeField] private float _boostMaxSpeed = 40f;
     [SerializeField] private float _boostIncrement = 1.10f;
 
     private void Start()
     {
-        _currentSpeed = _speed;
         _phy = gameObject.GetComponent<CustomPhysics>();
-        _phy.MaxSpeed = _maxVel;
+
         switch(players)
         {
             case Players.Player1:
@@ -39,34 +41,13 @@ public class RoombaController : MonoBehaviour
             default:
                 break;
         }
+        _currentState = _normalState;
         
     }
 
     void FixedUpdate()
     {
-        ChooseVectorPlayer();
-
-        Vector2 forward = new Vector2(transform.forward.x, transform.forward.z);
-        
-        if (_boosting && _boostFuel > 0)
-        { 
-            _phy.MaxSpeed = _boostMaxSpeed;
-            _currentSpeed = Mathf.Min(_boostMaxSpeed, _currentSpeed * _boostIncrement);
-            _phy.addTorque(bisector(_vector, forward) * _rotateSpeed);
-            _boostFuel = Mathf.Max(_boostFuel - Time.deltaTime, 0);
-        }
-        else
-        {
-            _currentSpeed = _speed;
-            _phy.addTorque(bisector(_vector, forward) * _rotateSpeed);
-            _boostFuel = Mathf.Min(_boostFuel + Time.deltaTime, _maxFuel);
-        }
-        moveRoomba(_currentSpeed);
-
-        if(transform.childCount <= 1)
-        {
-            Destroy(gameObject);
-        }
+        _currentState = _currentState.runFrame(this);
     }
 
     private void ChooseVectorPlayer()
@@ -74,10 +55,10 @@ public class RoombaController : MonoBehaviour
         switch (players)
         {
             case Players.Player1:
-                _vector = _input.Player1;
+                _inputVector = _input.Player1;
                 break;
             case Players.Player2:
-                _vector = _input.Player2;
+                _inputVector = _input.Player2;
                 break;
             default:
                 break;
@@ -86,21 +67,10 @@ public class RoombaController : MonoBehaviour
 
     private void moveRoomba(float currentSpeed)
     {
-        _phy.addForce(_vector, currentSpeed);
+        _phy.addForce(_inputVector, currentSpeed);
     }
     private void Boost()
     {
         _boosting = !_boosting;
     }
-
-    #region(UtilityFunctions)
-    private Vector2 bisector(Vector2 a, Vector2 b)
-    {
-        if (_phy.linearDependency(a,b))
-        {
-            a += new Vector2(0.0001f,0.0001f);
-        }
-        return (b.magnitude * a + a.magnitude * b).normalized;
-    }
-    #endregion
 }
