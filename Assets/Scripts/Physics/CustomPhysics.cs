@@ -82,10 +82,4 @@ public class CustomPhysics : MonoBehaviour
     {
         return (a.x * b.x) + (a.y * b.y) != 0;
     }
-
-    private void LateUpdate()
-    {
-        transform.localEulerAngles = new Vector3(0, transform.localEulerAngles.y, 0);
-        _rb.angularVelocity = new Vector3(0, _rb.angularVelocity.y, 0);
-    }
 }

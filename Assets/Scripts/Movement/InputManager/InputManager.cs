@@ -28,11 +28,6 @@ public class InputManager : MonoBehaviour
         _input.Player1.Move.canceled += P1MovePerformed;
         _input.Player1.Boost.performed += P1BoostPerformed;
         _input.Player1.Boost.canceled += P1BoostPerformed;
-
-        _input.Player2.Move.performed += P2MovePerformed;
-        _input.Player2.Move.canceled += P2MovePerformed;
-        _input.Player2.Boost.performed += P2BoostPerformed;
-        _input.Player2.Boost.canceled += P2BoostPerformed;
     }
 
     private void P1MovePerformed(InputAction.CallbackContext ctx)
