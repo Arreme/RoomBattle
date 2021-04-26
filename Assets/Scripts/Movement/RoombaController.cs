@@ -2,22 +2,21 @@
 
 public class RoombaController : MonoBehaviour
 {
-    public CustomPhysics _phy;
-    [SerializeField] private InputManager _input;
-    public enum Players { Player1, Player2, Player3, Player4 }
-    public Players players;
-
-    [Header("Movement variables")]
+    [Header("Input")]
     public Vector3 _inputVector = Vector3.zero;
+
+    public CustomPhysics _phy;
+    [Header("Movement variables")]
     [SerializeField] private float _speed = 10f;
-    [SerializeField] float _maxVel = 10f;
-    [SerializeField] float _rotateSpeed = 2.5f;
+    [SerializeField] private float _maxVel = 10f;
+    [SerializeField] private float _rotateSpeed = 2.5f;
 
     [Header("Boosting variables")]
     public bool _boosting = false;
-    [SerializeField] float _boostTime = 2f;
+    [SerializeField] private float _boostTime = 2f;
     [SerializeField] private float _boostMaxSpeed = 40f;
 
+    [Header("States")]
     private RoombaState _currentState;
 
     public BoostingState _boostingState;
@@ -28,44 +27,22 @@ public class RoombaController : MonoBehaviour
         _phy = gameObject.GetComponent<CustomPhysics>();
         _normalState = new NormalState(_speed, _maxVel, _rotateSpeed);
         _boostingState = new BoostingState(_boostTime,_boostMaxSpeed);
-        switch (players)
-        {
-            case Players.Player1:
-                _input.P1Boost += Boost;
-                break;
-            case Players.Player2:
-                _input.P2Boost += Boost;
-                break;
-            default:
-                break;
-        }
         _currentState = _normalState;
         
     }
 
     void FixedUpdate()
     {
-        ChooseVectorPlayer();
         _currentState = _currentState.runFrame(this);
     }
 
-    private void ChooseVectorPlayer()
+    public void SetInputVector(Vector2 input)
     {
-        switch (players)
-        {
-            case Players.Player1:
-                _inputVector = _input.Player1;
-                break;
-            case Players.Player2:
-                _inputVector = _input.Player2;
-                break;
-            default:
-                break;
-        }
+        _inputVector = input;
     }
 
-    private void Boost()
+    public void SetBoost(bool pressed)
     {
-        _boosting = !_boosting;
+        _boosting = pressed;
     }
 }

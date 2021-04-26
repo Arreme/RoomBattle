@@ -2,9 +2,9 @@ using UnityEngine;
 
 public class NormalState : RoombaState
 {
-    public float _speed;
-    public float _maxVel;
-    public float _rotateSpeed;
+    private float _speed;
+    private float _maxVel;
+    private float _rotateSpeed;
 
     public NormalState(float speed, float maxVel, float rotateSpeed)
     {
@@ -20,7 +20,7 @@ public class NormalState : RoombaState
         controller._phy.addForce(controller._inputVector, _speed);
         if (controller._boosting)
         {
-            return controller._boostingState.reset(new Vector2(controller.transform.forward.x, controller.transform.forward.z));
+            return controller._boostingState.setUp(new Vector2(controller.transform.forward.x, controller.transform.forward.z));
         } else
         {
             return controller._normalState;

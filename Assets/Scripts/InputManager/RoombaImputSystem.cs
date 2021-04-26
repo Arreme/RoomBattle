@@ -1,4 +1,4 @@
-// GENERATED AUTOMATICALLY FROM 'Assets/Scripts/Movement/InputManager/RoombaImputSystem.inputactions'
+// GENERATED AUTOMATICALLY FROM 'Assets/Scripts/InputManager/RoombaImputSystem.inputactions'
 
 using System;
 using System.Collections;
@@ -22,14 +22,30 @@ public class @RoombaImputSystem : IInputActionCollection, IDisposable
                     ""name"": ""Move"",
                     ""type"": ""PassThrough"",
                     ""id"": ""e1ca1a2f-edb6-4758-9c87-fa628a761eca"",
-                    ""expectedControlType"": """",
+                    ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
                     ""interactions"": """"
                 },
                 {
                     ""name"": ""Boost"",
-                    ""type"": ""Button"",
+                    ""type"": ""PassThrough"",
                     ""id"": ""8b2b9637-adb6-482d-a307-cb9018324629"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Action"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""3529f584-2299-43a8-b57d-d085ebe3c506"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Select"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""f62415e5-bcbb-44b1-adc1-1988e4bc03ca"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
@@ -233,6 +249,50 @@ public class @RoombaImputSystem : IInputActionCollection, IDisposable
                     ""action"": ""Boost"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""de0eb0b8-4243-4eaa-a93a-720a0541463c"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": ""Press(behavior=2)"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Action"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3e39b19f-617f-49a2-b5a4-13af2b4b23a2"",
+                    ""path"": ""<Gamepad>/buttonWest"",
+                    ""interactions"": ""Press(behavior=2)"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Action"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f5e11028-9206-4a33-aa06-edc7cdf54ebb"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": ""Press(behavior=2)"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Select"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e465cf24-2bc4-41c9-a9e4-65102b32104a"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": ""Press(behavior=2)"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Select"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -243,6 +303,8 @@ public class @RoombaImputSystem : IInputActionCollection, IDisposable
         m_Player1 = asset.FindActionMap("Player1", throwIfNotFound: true);
         m_Player1_Move = m_Player1.FindAction("Move", throwIfNotFound: true);
         m_Player1_Boost = m_Player1.FindAction("Boost", throwIfNotFound: true);
+        m_Player1_Action = m_Player1.FindAction("Action", throwIfNotFound: true);
+        m_Player1_Select = m_Player1.FindAction("Select", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -294,12 +356,16 @@ public class @RoombaImputSystem : IInputActionCollection, IDisposable
     private IPlayer1Actions m_Player1ActionsCallbackInterface;
     private readonly InputAction m_Player1_Move;
     private readonly InputAction m_Player1_Boost;
+    private readonly InputAction m_Player1_Action;
+    private readonly InputAction m_Player1_Select;
     public struct Player1Actions
     {
         private @RoombaImputSystem m_Wrapper;
         public Player1Actions(@RoombaImputSystem wrapper) { m_Wrapper = wrapper; }
         public InputAction @Move => m_Wrapper.m_Player1_Move;
         public InputAction @Boost => m_Wrapper.m_Player1_Boost;
+        public InputAction @Action => m_Wrapper.m_Player1_Action;
+        public InputAction @Select => m_Wrapper.m_Player1_Select;
         public InputActionMap Get() { return m_Wrapper.m_Player1; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -315,6 +381,12 @@ public class @RoombaImputSystem : IInputActionCollection, IDisposable
                 @Boost.started -= m_Wrapper.m_Player1ActionsCallbackInterface.OnBoost;
                 @Boost.performed -= m_Wrapper.m_Player1ActionsCallbackInterface.OnBoost;
                 @Boost.canceled -= m_Wrapper.m_Player1ActionsCallbackInterface.OnBoost;
+                @Action.started -= m_Wrapper.m_Player1ActionsCallbackInterface.OnAction;
+                @Action.performed -= m_Wrapper.m_Player1ActionsCallbackInterface.OnAction;
+                @Action.canceled -= m_Wrapper.m_Player1ActionsCallbackInterface.OnAction;
+                @Select.started -= m_Wrapper.m_Player1ActionsCallbackInterface.OnSelect;
+                @Select.performed -= m_Wrapper.m_Player1ActionsCallbackInterface.OnSelect;
+                @Select.canceled -= m_Wrapper.m_Player1ActionsCallbackInterface.OnSelect;
             }
             m_Wrapper.m_Player1ActionsCallbackInterface = instance;
             if (instance != null)
@@ -325,6 +397,12 @@ public class @RoombaImputSystem : IInputActionCollection, IDisposable
                 @Boost.started += instance.OnBoost;
                 @Boost.performed += instance.OnBoost;
                 @Boost.canceled += instance.OnBoost;
+                @Action.started += instance.OnAction;
+                @Action.performed += instance.OnAction;
+                @Action.canceled += instance.OnAction;
+                @Select.started += instance.OnSelect;
+                @Select.performed += instance.OnSelect;
+                @Select.canceled += instance.OnSelect;
             }
         }
     }
@@ -333,5 +411,7 @@ public class @RoombaImputSystem : IInputActionCollection, IDisposable
     {
         void OnMove(InputAction.CallbackContext context);
         void OnBoost(InputAction.CallbackContext context);
+        void OnAction(InputAction.CallbackContext context);
+        void OnSelect(InputAction.CallbackContext context);
     }
 }

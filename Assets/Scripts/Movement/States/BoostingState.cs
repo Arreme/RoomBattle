@@ -28,7 +28,7 @@ public class BoostingState : RoombaState
         }
     }
 
-    public RoombaState reset(Vector2 direction)
+    public RoombaState setUp(Vector2 direction)
     {
         _direction = direction;
         _currentTime = boostTime;
