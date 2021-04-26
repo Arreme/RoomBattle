@@ -436,7 +436,6 @@ GameObject:
   - component: {fileID: 5975971300749553938}
   - component: {fileID: 5975971300749553940}
   - component: {fileID: 5975971300749553941}
-  - component: {fileID: 5975971300749554025}
   - component: {fileID: 5975971300749553942}
   m_Layer: 0
   m_Name: Player
@@ -511,60 +510,6 @@ MonoBehaviour:
   _boosting: 0
   _boostTime: 0.3
   _boostMaxSpeed: 120
---- !u!114 &5975971300749554025
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5975971300749553939}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Actions: {fileID: -944628639613478452, guid: 45f568fbb7ee42046903b3ee957afa6a, type: 3}
-  m_NotificationBehavior: 2
-  m_UIInputModule: {fileID: 0}
-  m_DeviceLostEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_DeviceRegainedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ControlsChangedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ActionEvents:
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 5975971300749553942}
-        m_TargetAssemblyTypeName: InputManager, Assembly-CSharp
-        m_MethodName: MovePerformed
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: e1ca1a2f-edb6-4758-9c87-fa628a761eca
-    m_ActionName: Player1/Move[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d,/Keyboard/i,/Keyboard/k,/Keyboard/j,/Keyboard/l]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 8b2b9637-adb6-482d-a307-cb9018324629
-    m_ActionName: Player1/Boost[/Keyboard/shift,/Keyboard/space]
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 3529f584-2299-43a8-b57d-d085ebe3c506
-    m_ActionName: Player1/Action[/Keyboard/q]
-  m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: 
-  m_DefaultActionMap: Player1
-  m_SplitScreenIndex: -1
-  m_Camera: {fileID: 0}
 --- !u!114 &5975971300749553942
 MonoBehaviour:
   m_ObjectHideFlags: 0
