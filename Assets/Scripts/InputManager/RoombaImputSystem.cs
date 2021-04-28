@@ -187,7 +187,7 @@ public class @RoombaImputSystem : IInputActionCollection, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""de0eb0b8-4243-4eaa-a93a-720a0541463c"",
-                    ""path"": ""<Keyboard>/q"",
+                    ""path"": ""<Keyboard>/e"",
                     ""interactions"": ""Press(behavior=2)"",
                     ""processors"": """",
                     ""groups"": """",

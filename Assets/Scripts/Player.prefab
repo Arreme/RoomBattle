@@ -437,6 +437,8 @@ GameObject:
   - component: {fileID: 5975971300749553940}
   - component: {fileID: 5975971300749553941}
   - component: {fileID: 5975971300749553942}
+  - component: {fileID: 4267022648698225045}
+  - component: {fileID: 4530753972910647207}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -503,7 +505,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _inputVector: {x: 0, y: 0, z: 0}
-  _phy: {fileID: 0}
+  _phy: {fileID: 5975971300749553940}
   _speed: 10
   _maxVel: 10
   _rotateSpeed: 6
@@ -523,3 +525,29 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerMesh: {fileID: 5975971300254160200}
+--- !u!135 &4267022648698225045
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5975971300749553939}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.33
+  m_Center: {x: 0, y: 0.34, z: -0.75}
+--- !u!114 &4530753972910647207
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5975971300749553939}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98a299b809b51334688e85f14096e4d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ballon: {fileID: 5975971299816226977}
