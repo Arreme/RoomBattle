@@ -31,9 +31,12 @@ public class InputManager : MonoBehaviour
         if (obj.action.name == controls.Player1.Move.name)
         {
             MovePerformed(obj);
-        } else
+        } else if (obj.action.name == controls.Player1.Boost.name)
         {
             BoostPerformed(obj);
+        } else
+        {
+
         }
     }
 
@@ -45,5 +48,10 @@ public class InputManager : MonoBehaviour
     public void BoostPerformed(InputAction.CallbackContext ctx)
     {
         player.SetBoost(ctx.ReadValueAsButton());
+    }
+
+    public void ActionPerformed(InputAction.CallbackContext ctx)
+    {
+        player.SetAction(ctx.ReadValueAsButton());
     }
 }

@@ -21,6 +21,9 @@ public class NormalState : RoombaState
         if (controller._boosting)
         {
             return controller._boostingState.setUp(new Vector2(controller.transform.forward.x, controller.transform.forward.z));
+        } else if (controller._powerUp)
+        {
+            return controller._currentPowerUp.runPowerUp(controller);
         } else
         {
             return controller._normalState;

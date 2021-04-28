@@ -11,7 +11,7 @@ public class PlayerJoin : MonoBehaviour
     {
         if (Keyboard.current.enterKey.isPressed)
         {
-            Debug.Log("Hey");
+            //_manager.JoinPlayer(0,-1,"Player1",InputDevice.all);
         }
     }
 }

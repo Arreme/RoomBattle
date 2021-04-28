@@ -17,10 +17,13 @@ public class RoombaController : MonoBehaviour
     [SerializeField] private float _boostMaxSpeed = 40f;
 
     [Header("States")]
+    public bool _powerUp = false;
     private RoombaState _currentState;
 
     public BoostingState _boostingState;
     public NormalState _normalState;
+
+    public PowerUp _currentPowerUp;
 
     private void Start()
     {
@@ -44,5 +47,15 @@ public class RoombaController : MonoBehaviour
     public void SetBoost(bool pressed)
     {
         _boosting = pressed;
+    }
+
+    public void SetAction(bool pressed)
+    {
+        _powerUp = pressed;
+    }
+
+    public void getPowerUp(PowerUp powerUp)
+    {
+        _currentPowerUp = powerUp;
     }
 }
