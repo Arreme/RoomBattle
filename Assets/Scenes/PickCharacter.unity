@@ -123,6 +123,17 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!114 &164782159 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 528488590586704803, guid: 806a46515c22151438bd33cc66cb9fae, type: 3}
+  m_PrefabInstance: {fileID: 528488590504456836}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 621567455fd1c4ceb811cc8a00b6a1a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &193801002
 GameObject:
   m_ObjectHideFlags: 0
@@ -323,6 +334,50 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!1 &1823499044
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1823499046}
+  - component: {fileID: 1823499045}
+  m_Layer: 0
+  m_Name: PlayerJoiner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1823499045
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1823499044}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4fae3878804cd014e853cb9b8245ad51, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _manager: {fileID: 164782159}
+--- !u!4 &1823499046
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1823499044}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -21.744354, y: 7.1200995, z: 9.510915}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &528488590504456836
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -379,8 +434,60 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 528488590586704803, guid: 806a46515c22151438bd33cc66cb9fae, type: 3}
+      propertyPath: m_JoinBehavior
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 528488590586704803, guid: 806a46515c22151438bd33cc66cb9fae, type: 3}
       propertyPath: m_MaxPlayerCount
       value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 528488590586704803, guid: 806a46515c22151438bd33cc66cb9fae, type: 3}
+      propertyPath: m_NotificationBehavior
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 528488590586704803, guid: 806a46515c22151438bd33cc66cb9fae, type: 3}
+      propertyPath: m_JoinAction.m_Reference
+      value: 
+      objectReference: {fileID: -6064516416455013398, guid: 45f568fbb7ee42046903b3ee957afa6a, type: 3}
+    - target: {fileID: 528488590586704803, guid: 806a46515c22151438bd33cc66cb9fae, type: 3}
+      propertyPath: m_JoinAction.m_Action.m_Id
+      value: b90a16f3-8674-4400-868b-4d546d001d4c
+      objectReference: {fileID: 0}
+    - target: {fileID: 528488590586704803, guid: 806a46515c22151438bd33cc66cb9fae, type: 3}
+      propertyPath: m_JoinAction.m_UseReference
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 528488590586704803, guid: 806a46515c22151438bd33cc66cb9fae, type: 3}
+      propertyPath: m_JoinAction.m_Action.m_Name
+      value: Join
+      objectReference: {fileID: 0}
+    - target: {fileID: 528488590586704803, guid: 806a46515c22151438bd33cc66cb9fae, type: 3}
+      propertyPath: m_JoinAction.m_Action.m_SingletonActionBindings.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 528488590586704803, guid: 806a46515c22151438bd33cc66cb9fae, type: 3}
+      propertyPath: m_JoinAction.m_Action.m_SingletonActionBindings.Array.data[0].m_Id
+      value: 6f053511-90c0-41d9-99ff-ce4d2337fab2
+      objectReference: {fileID: 0}
+    - target: {fileID: 528488590586704803, guid: 806a46515c22151438bd33cc66cb9fae, type: 3}
+      propertyPath: m_JoinAction.m_Action.m_SingletonActionBindings.Array.data[1].m_Id
+      value: 6f6c4fa0-fd14-4eae-8eb1-3a9267a7da7f
+      objectReference: {fileID: 0}
+    - target: {fileID: 528488590586704803, guid: 806a46515c22151438bd33cc66cb9fae, type: 3}
+      propertyPath: m_JoinAction.m_Action.m_SingletonActionBindings.Array.data[0].m_Path
+      value: <Keyboard>/enter
+      objectReference: {fileID: 0}
+    - target: {fileID: 528488590586704803, guid: 806a46515c22151438bd33cc66cb9fae, type: 3}
+      propertyPath: m_JoinAction.m_Action.m_SingletonActionBindings.Array.data[1].m_Path
+      value: <Keyboard>/space
+      objectReference: {fileID: 0}
+    - target: {fileID: 528488590586704803, guid: 806a46515c22151438bd33cc66cb9fae, type: 3}
+      propertyPath: m_JoinAction.m_Action.m_SingletonActionBindings.Array.data[0].m_Action
+      value: Join
+      objectReference: {fileID: 0}
+    - target: {fileID: 528488590586704803, guid: 806a46515c22151438bd33cc66cb9fae, type: 3}
+      propertyPath: m_JoinAction.m_Action.m_SingletonActionBindings.Array.data[1].m_Action
+      value: Join
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 806a46515c22151438bd33cc66cb9fae, type: 3}

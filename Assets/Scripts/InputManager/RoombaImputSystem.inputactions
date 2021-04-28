@@ -216,6 +216,55 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "Joining",
+            "id": "14e9a1b5-2ecf-4305-b724-c4cb58770f18",
+            "actions": [
+                {
+                    "name": "Join",
+                    "type": "Button",
+                    "id": "13635268-75e1-47d0-bf91-b06c116b05c1",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "1764abba-1325-4ae1-a3ee-1b6b3c4a1386",
+                    "path": "<Gamepad>/buttonSouth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Join",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "45543ee4-bf6c-4be2-9a6a-95eb27d617e4",
+                    "path": "<Keyboard>/enter",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Join",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "6b1b15a7-9d10-4dad-b526-1d32515ff18a",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Join",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": []

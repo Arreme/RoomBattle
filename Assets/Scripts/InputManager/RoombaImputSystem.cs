@@ -229,6 +229,55 @@ public class @RoombaImputSystem : IInputActionCollection, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""Joining"",
+            ""id"": ""14e9a1b5-2ecf-4305-b724-c4cb58770f18"",
+            ""actions"": [
+                {
+                    ""name"": ""Join"",
+                    ""type"": ""Button"",
+                    ""id"": ""13635268-75e1-47d0-bf91-b06c116b05c1"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""1764abba-1325-4ae1-a3ee-1b6b3c4a1386"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Join"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""45543ee4-bf6c-4be2-9a6a-95eb27d617e4"",
+                    ""path"": ""<Keyboard>/enter"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Join"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6b1b15a7-9d10-4dad-b526-1d32515ff18a"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Join"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -239,6 +288,9 @@ public class @RoombaImputSystem : IInputActionCollection, IDisposable
         m_Player1_Boost = m_Player1.FindAction("Boost", throwIfNotFound: true);
         m_Player1_Action = m_Player1.FindAction("Action", throwIfNotFound: true);
         m_Player1_Select = m_Player1.FindAction("Select", throwIfNotFound: true);
+        // Joining
+        m_Joining = asset.FindActionMap("Joining", throwIfNotFound: true);
+        m_Joining_Join = m_Joining.FindAction("Join", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -341,11 +393,48 @@ public class @RoombaImputSystem : IInputActionCollection, IDisposable
         }
     }
     public Player1Actions @Player1 => new Player1Actions(this);
+
+    // Joining
+    private readonly InputActionMap m_Joining;
+    private IJoiningActions m_JoiningActionsCallbackInterface;
+    private readonly InputAction m_Joining_Join;
+    public struct JoiningActions
+    {
+        private @RoombaImputSystem m_Wrapper;
+        public JoiningActions(@RoombaImputSystem wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Join => m_Wrapper.m_Joining_Join;
+        public InputActionMap Get() { return m_Wrapper.m_Joining; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(JoiningActions set) { return set.Get(); }
+        public void SetCallbacks(IJoiningActions instance)
+        {
+            if (m_Wrapper.m_JoiningActionsCallbackInterface != null)
+            {
+                @Join.started -= m_Wrapper.m_JoiningActionsCallbackInterface.OnJoin;
+                @Join.performed -= m_Wrapper.m_JoiningActionsCallbackInterface.OnJoin;
+                @Join.canceled -= m_Wrapper.m_JoiningActionsCallbackInterface.OnJoin;
+            }
+            m_Wrapper.m_JoiningActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @Join.started += instance.OnJoin;
+                @Join.performed += instance.OnJoin;
+                @Join.canceled += instance.OnJoin;
+            }
+        }
+    }
+    public JoiningActions @Joining => new JoiningActions(this);
     public interface IPlayer1Actions
     {
         void OnMove(InputAction.CallbackContext context);
         void OnBoost(InputAction.CallbackContext context);
         void OnAction(InputAction.CallbackContext context);
         void OnSelect(InputAction.CallbackContext context);
+    }
+    public interface IJoiningActions
+    {
+        void OnJoin(InputAction.CallbackContext context);
     }
 }
