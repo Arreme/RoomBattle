@@ -6,7 +6,7 @@ public class NormalState : RoombaState
     private float _maxVel;
     private float _rotateSpeed;
 
-    public NormalState(float speed, float maxVel, float rotateSpeed)
+    public NormalState(float speed, float maxVel, float rotateSpeed, MeshRenderer[] mesh)
     {
         _speed = speed;
         _maxVel = maxVel;

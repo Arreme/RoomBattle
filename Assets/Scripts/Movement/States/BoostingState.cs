@@ -7,7 +7,7 @@ public class BoostingState : RoombaState
     private float _currentTime;
     private Vector2 _direction;
 
-    public BoostingState(float boostTime, float boostMaxSpeed)
+    public BoostingState(float boostTime, float boostMaxSpeed, MeshRenderer[] mesh)
     {
         this.boostTime = boostTime;
         this.boostMaxSpeed = boostMaxSpeed;

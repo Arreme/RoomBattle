@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 751088270044457366}
   - component: {fileID: 751088270044457367}
   - component: {fileID: 8733590288981851919}
-  - component: {fileID: -2242445137211500273}
   - component: {fileID: -5809736432097413538}
   m_Layer: 0
   m_Name: Balloon
@@ -114,18 +113,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &-2242445137211500273
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 751088270044457365}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d2890c6d19d17d5439a7cc7cd726ebdf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!145 &-5809736432097413538
 SpringJoint:
   m_ObjectHideFlags: 0
@@ -137,7 +124,7 @@ SpringJoint:
   m_ConnectedArticulationBody: {fileID: 0}
   m_Anchor: {x: 0, y: 0.49999997, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0, y: 0.3, z: 1}
+  m_ConnectedAnchor: {x: 0, y: 0.65, z: -0.702}
   serializedVersion: 2
   m_Spring: 2
   m_Damper: 100

@@ -80,4 +80,10 @@ public class CustomPhysics : MonoBehaviour
         _rb.angularVelocity = new Vector3(0, _rb.angularVelocity.y, 0);
         transform.localEulerAngles = new Vector3(0, transform.localEulerAngles.y, 0);
     }
+
+    void OnCollisionEnter(Collision collisionInfo)
+    {
+        Vector3 myCollisionNormal = collisionInfo.contacts[0].normal;
+        Debug.Log(myCollisionNormal);
+    }
 }

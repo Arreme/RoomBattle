@@ -17,11 +17,13 @@ public class RoombaController : MonoBehaviour
     [SerializeField] private float _boostMaxSpeed = 40f;
 
     [Header("States")]
+    [SerializeField] private float _invincibilityTime = 2f;
     public bool _powerUp = false;
     private RoombaState _currentState;
 
     public BoostingState _boostingState;
     public NormalState _normalState;
+    public InvincibleState _invState;
 
     public PowerUp _currentPowerUp;
 
@@ -30,8 +32,10 @@ public class RoombaController : MonoBehaviour
     private void Start()
     {
         _phy = gameObject.GetComponent<CustomPhysics>();
-        _normalState = new NormalState(_speed, _maxVel, _rotateSpeed);
-        _boostingState = new BoostingState(_boostTime,_boostMaxSpeed);
+        MeshRenderer[] mesh = gameObject.GetComponentsInChildren<MeshRenderer>();
+        _normalState = new NormalState(_speed, _maxVel, _rotateSpeed,mesh);
+        _boostingState = new BoostingState(_boostTime,_boostMaxSpeed,mesh);
+        _invState = new InvincibleState(_invincibilityTime, _speed, _maxVel, _rotateSpeed,mesh);
         _currentState = _normalState;
     }
 
@@ -68,5 +72,10 @@ public class RoombaController : MonoBehaviour
     public void getPowerUp(PowerUp powerUp)
     {
         _currentPowerUp = powerUp;
+    }
+
+    public void activateInvincibility()
+    {
+        _currentState = _invState;
     }
 }

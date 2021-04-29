@@ -5,6 +5,7 @@ using UnityEngine;
 public class WeaponDetect : MonoBehaviour
 {
     [SerializeField] GameObject ballon;
+    [SerializeField] RoombaController _controller;
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.name.Equals("Knife"))
@@ -13,8 +14,9 @@ public class WeaponDetect : MonoBehaviour
         }
     }
 
-    private void destroyBallon()
+    public void destroyBallon()
     {
         Destroy(ballon);
+        _controller.activateInvincibility();
     }
 }
