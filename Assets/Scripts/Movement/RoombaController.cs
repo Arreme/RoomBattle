@@ -25,18 +25,29 @@ public class RoombaController : MonoBehaviour
 
     public PowerUp _currentPowerUp;
 
+    private int _nChildNoBalloons = 3;
+
     private void Start()
     {
         _phy = gameObject.GetComponent<CustomPhysics>();
         _normalState = new NormalState(_speed, _maxVel, _rotateSpeed);
         _boostingState = new BoostingState(_boostTime,_boostMaxSpeed);
         _currentState = _normalState;
-        
     }
 
     void FixedUpdate()
     {
         _currentState = _currentState.runFrame(this);
+
+        if (transform.childCount <= _nChildNoBalloons)
+        {
+            destroyPlayer();
+        }
+    }
+
+    private void destroyPlayer()
+    {
+        Destroy(gameObject);
     }
 
     public void SetInputVector(Vector2 input)
