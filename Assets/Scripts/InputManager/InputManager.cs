@@ -36,7 +36,7 @@ public class InputManager : MonoBehaviour
             BoostPerformed(obj);
         } else
         {
-
+            ActionPerformed(obj);
         }
     }
 

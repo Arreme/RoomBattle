@@ -4,5 +4,5 @@ using UnityEngine;
 
 public interface PowerUp
 {
-    RoombaState runPowerUp(RoombaController controller);
+    RoombaState PowerUp(RoombaController controller);
 }

@@ -2,12 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class YesPowerUp : PowerUp
+public class RunPowerUp : PowerUp
 {
-    public RoombaState runPowerUp(RoombaController controller)
+    public RoombaState PowerUp(RoombaController controller)
     {
         controller._currentPowerUp = new NoPowerUp();
         Debug.Log("Ayo, powerup wasted");
-        return controller._normalState;
+        return controller._runPUState;
     }
 }

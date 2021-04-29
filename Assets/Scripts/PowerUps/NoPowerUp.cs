@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class NoPowerUp : PowerUp
 {
-    public RoombaState runPowerUp(RoombaController controller)
+    public RoombaState PowerUp(RoombaController controller)
     {
         Debug.Log("No power up!");
         return controller._normalState;
