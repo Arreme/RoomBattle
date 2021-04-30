@@ -43,11 +43,15 @@ public class MapLimiter : MonoBehaviour
         return Vector2.Distance(Target.position, transform.position);
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerStay(Collider other)
     {
         if (other.gameObject.tag.Equals("Player"))
         {
-            other.gameObject.GetComponentInParent<WeaponDetect>().destroyBallon();
+            SphereCollider _col = other.gameObject.GetComponentInParent<SphereCollider>();
+            if(_col.enabled)
+            {
+                other.gameObject.GetComponentInParent<WeaponDetect>().destroyBallon();
+            }
         }
     }
 }
