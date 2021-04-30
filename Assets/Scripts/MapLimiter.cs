@@ -7,7 +7,7 @@ public class MapLimiter : MonoBehaviour
     public Transform Target;
     //private Rigidbody2D _rigidbody;
     [SerializeField] private float speed;
-    private int count = 0;
+    //private int count = 0;
     private float _minDistanceToTarget = 0.001f;
 
     // Start is called before the first frame update

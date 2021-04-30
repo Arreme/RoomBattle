@@ -890,7 +890,7 @@ CanvasRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 486929121219766154}
-  m_CullTransparentMesh: 1
+  m_CullTransparentMesh: 0
 --- !u!114 &486929121219766156
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1961,7 +1961,7 @@ MonoBehaviour:
   m_FirstSelected: {fileID: 486929121453487394}
   m_sendNavigationEvents: 1
   m_DragThreshold: 10
-  m_PlayerRoot: {fileID: 486929120336050958}
+  m_PlayerRoot: {fileID: 486929121219766154}
 --- !u!114 &6401106347910842834
 MonoBehaviour:
   m_ObjectHideFlags: 0

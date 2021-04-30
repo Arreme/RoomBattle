@@ -51,6 +51,9 @@ public class RoombaController : MonoBehaviour
 
     void FixedUpdate()
     {
+        Debug.DrawLine(transform.position + Vector3.zero, transform.position + transform.up, Color.red);
+        Debug.DrawLine(transform.position + Vector3.zero, transform.position + new Vector3(_inputVector.x, _inputVector.y, 0), Color.green);
+        Debug.DrawLine(transform.position + Vector3.zero, transform.position + new Vector3(bisector(_inputVector, transform.up).x, bisector(_inputVector, transform.up).y), Color.blue);
         _currentState = _currentState.runFrame(this);
 
         if (transform.childCount <= _nChildNoBalloons)
@@ -100,5 +103,14 @@ public class RoombaController : MonoBehaviour
     {
         _col.enabled = true;
         _mesh[1].material.color = Color.blue;
+    }
+
+    private Vector2 bisector(Vector2 a, Vector2 b)
+    {
+        if ((a.x * b.x) + (a.y * b.y) != 0)
+        {
+            a += new Vector2(0.0001f, 0.0001f);
+        }
+        return (b.magnitude * a + a.magnitude * b).normalized;
     }
 }

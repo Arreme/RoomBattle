@@ -30,6 +30,7 @@ public class InputManager : MonoBehaviour
     {
         if (obj.action.name == controls.Player1.Move.name)
         {
+            Debug.Log("Doing Something");
             MovePerformed(obj);
         } else if (obj.action.name == controls.Player1.Boost.name)
         {

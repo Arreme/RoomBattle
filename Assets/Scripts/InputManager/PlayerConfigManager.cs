@@ -30,6 +30,7 @@ public class PlayerConfigManager : MonoBehaviour
     public void ReadyPlayer(int index)
     {
         _configs[index].IsReady = true;
+        Debug.Log("Hey");
         if (_configs.All(p => p.IsReady == true))
         {
             //Start Game
@@ -48,7 +49,6 @@ public class PlayerConfigManager : MonoBehaviour
         pi.transform.SetParent(transform);
         if (!_configs.Any(p => p.PlayerIndex == pi.playerIndex))
         {
-            
             _configs.Add(new PlayerConfig(pi));
         }
     }
