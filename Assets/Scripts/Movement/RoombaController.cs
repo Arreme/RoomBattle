@@ -42,6 +42,7 @@ public class RoombaController : MonoBehaviour
         _boostingState = new BoostingState(_boostTime,_boostMaxSpeed,_mesh);
         _runPUState = new RunPowerUpState(_runPUTime, _speed *_runPUSpeedMultiplier, _rotateSpeed, _mesh);
         _currentState = _normalState;
+        _currentPowerUp = new NoPowerUp();
     }
 
     void FixedUpdate()
