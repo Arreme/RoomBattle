@@ -26,11 +26,12 @@ public class InvincibleState : RoombaState
 
     public RoombaState runFrame(RoombaController controller)
     {
+        _mesh[0].material.color = Color.red;
         _currentInvTime -= Time.deltaTime;
         controller._phy.MaxSpeed = _maxVel;
         controller._phy.addTorque(bisector(controller._inputVector, new Vector2(controller.transform.forward.x, controller.transform.forward.z)) * _rotateSpeed);
         controller._phy.addForce(controller._inputVector, _speed);
-        
+        Debug.Log("Invincible!!");
         if (_currentInvTime <= 0)
         {
             return controller._normalState;
