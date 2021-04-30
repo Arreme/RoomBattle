@@ -36,12 +36,13 @@ public class PlayerSetupMenu : MonoBehaviour
 
     public void SetColor(Material color)
     {
-        if (!inputEnabled) return;
+        if (!inputEnabled) { return; }
 
         PlayerConfigManager.Instance.SetPlayerColor(PlayerIndex, color);
         readyPanel.SetActive(true);
-        readyButton.Select();
+        readyButton.interactable = true;
         menuPanel.SetActive(false);
+        readyButton.Select();
     }
 
     public void ReadyPlayer()

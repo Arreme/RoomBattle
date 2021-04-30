@@ -235,10 +235,18 @@ public class @RoombaImputSystem : IInputActionCollection, IDisposable
             ""id"": ""14e9a1b5-2ecf-4305-b724-c4cb58770f18"",
             ""actions"": [
                 {
-                    ""name"": ""Join"",
-                    ""type"": ""Button"",
-                    ""id"": ""13635268-75e1-47d0-bf91-b06c116b05c1"",
-                    ""expectedControlType"": ""Button"",
+                    ""name"": ""Movement"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""ef85bceb-0d67-478d-ba76-944f8c90b78d"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Select"",
+                    ""type"": ""PassThrough"",
+                    ""id"": ""6b2f6be0-7025-4c2f-a369-3f41a1b210ec"",
+                    ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """"
                 }
@@ -246,34 +254,89 @@ public class @RoombaImputSystem : IInputActionCollection, IDisposable
             ""bindings"": [
                 {
                     ""name"": """",
-                    ""id"": ""1764abba-1325-4ae1-a3ee-1b6b3c4a1386"",
-                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""id"": ""c5826729-649d-47c9-9dbb-50b5b251f032"",
+                    ""path"": ""<Gamepad>/leftStick"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Movement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""WASD"",
+                    ""id"": ""7929c381-1eeb-442e-b7d0-605fb7b4004d"",
+                    ""path"": ""2DVector"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Join"",
+                    ""action"": ""Movement"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""57a3b979-c8db-40b6-a5e3-5b89cbfc0b8e"",
+                    ""path"": ""<Keyboard>/w"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""Movement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""52e790e1-02b8-4e98-82fd-a3bb377979c6"",
+                    ""path"": ""<Keyboard>/s"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""Movement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""fb148316-6379-469d-9144-cefcddf7fed0"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""Movement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""2f1a92bf-32a4-40fb-96c5-a6cfc026217f"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""Movement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""df99c840-556d-4266-a1b9-2f613c1ba10d"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": ""Press(behavior=2)"",
+                    ""processors"": """",
+                    ""groups"": ""Gamepad"",
+                    ""action"": ""Select"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
                 {
                     ""name"": """",
-                    ""id"": ""45543ee4-bf6c-4be2-9a6a-95eb27d617e4"",
+                    ""id"": ""c3246fc4-bded-454c-886b-4f7d656227dc"",
                     ""path"": ""<Keyboard>/enter"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Join"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""6b1b15a7-9d10-4dad-b526-1d32515ff18a"",
-                    ""path"": ""<Keyboard>/space"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Join"",
+                    ""groups"": ""New control scheme;Keyboard"",
+                    ""action"": ""Select"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -313,7 +376,8 @@ public class @RoombaImputSystem : IInputActionCollection, IDisposable
         m_Player1_Select = m_Player1.FindAction("Select", throwIfNotFound: true);
         // Joining
         m_Joining = asset.FindActionMap("Joining", throwIfNotFound: true);
-        m_Joining_Join = m_Joining.FindAction("Join", throwIfNotFound: true);
+        m_Joining_Movement = m_Joining.FindAction("Movement", throwIfNotFound: true);
+        m_Joining_Select = m_Joining.FindAction("Select", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -420,12 +484,14 @@ public class @RoombaImputSystem : IInputActionCollection, IDisposable
     // Joining
     private readonly InputActionMap m_Joining;
     private IJoiningActions m_JoiningActionsCallbackInterface;
-    private readonly InputAction m_Joining_Join;
+    private readonly InputAction m_Joining_Movement;
+    private readonly InputAction m_Joining_Select;
     public struct JoiningActions
     {
         private @RoombaImputSystem m_Wrapper;
         public JoiningActions(@RoombaImputSystem wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Join => m_Wrapper.m_Joining_Join;
+        public InputAction @Movement => m_Wrapper.m_Joining_Movement;
+        public InputAction @Select => m_Wrapper.m_Joining_Select;
         public InputActionMap Get() { return m_Wrapper.m_Joining; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -435,16 +501,22 @@ public class @RoombaImputSystem : IInputActionCollection, IDisposable
         {
             if (m_Wrapper.m_JoiningActionsCallbackInterface != null)
             {
-                @Join.started -= m_Wrapper.m_JoiningActionsCallbackInterface.OnJoin;
-                @Join.performed -= m_Wrapper.m_JoiningActionsCallbackInterface.OnJoin;
-                @Join.canceled -= m_Wrapper.m_JoiningActionsCallbackInterface.OnJoin;
+                @Movement.started -= m_Wrapper.m_JoiningActionsCallbackInterface.OnMovement;
+                @Movement.performed -= m_Wrapper.m_JoiningActionsCallbackInterface.OnMovement;
+                @Movement.canceled -= m_Wrapper.m_JoiningActionsCallbackInterface.OnMovement;
+                @Select.started -= m_Wrapper.m_JoiningActionsCallbackInterface.OnSelect;
+                @Select.performed -= m_Wrapper.m_JoiningActionsCallbackInterface.OnSelect;
+                @Select.canceled -= m_Wrapper.m_JoiningActionsCallbackInterface.OnSelect;
             }
             m_Wrapper.m_JoiningActionsCallbackInterface = instance;
             if (instance != null)
             {
-                @Join.started += instance.OnJoin;
-                @Join.performed += instance.OnJoin;
-                @Join.canceled += instance.OnJoin;
+                @Movement.started += instance.OnMovement;
+                @Movement.performed += instance.OnMovement;
+                @Movement.canceled += instance.OnMovement;
+                @Select.started += instance.OnSelect;
+                @Select.performed += instance.OnSelect;
+                @Select.canceled += instance.OnSelect;
             }
         }
     }
@@ -476,6 +548,7 @@ public class @RoombaImputSystem : IInputActionCollection, IDisposable
     }
     public interface IJoiningActions
     {
-        void OnJoin(InputAction.CallbackContext context);
+        void OnMovement(InputAction.CallbackContext context);
+        void OnSelect(InputAction.CallbackContext context);
     }
 }

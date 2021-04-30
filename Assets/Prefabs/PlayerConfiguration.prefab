@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &7394123279773376107
+--- !u!1 &3698094019892413943
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,9 +8,9 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 5934453872516856853}
-  - component: {fileID: 5819572854897651480}
-  - component: {fileID: 2687092739190535633}
+  - component: {fileID: 3698094019892413941}
+  - component: {fileID: 3698094019892413940}
+  - component: {fileID: 7628827022055132045}
   m_Layer: 0
   m_Name: PlayerConfiguration
   m_TagString: Untagged
@@ -18,27 +18,27 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &5934453872516856853
+--- !u!4 &3698094019892413941
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7394123279773376107}
+  m_GameObject: {fileID: 3698094019892413943}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 1, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5819572854897651480
+--- !u!114 &3698094019892413940
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7394123279773376107}
+  m_GameObject: {fileID: 3698094019892413943}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
@@ -56,23 +56,31 @@ MonoBehaviour:
   m_ControlsChangedEvent:
     m_PersistentCalls:
       m_Calls: []
-  m_ActionEvents: []
+  m_ActionEvents:
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 822c120e-aa06-476b-8b24-3f46fb2e2cc6
+    m_ActionName: PlayerMovement/Movement[/XInputControllerWindows/leftStick,/XInputControllerWindows/leftStick,/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 4eb5ce68-1e6e-4023-af30-4f54a99c111b
+    m_ActionName: PlayerMovement/Select[/XInputControllerWindows/buttonSouth,/XInputControllerWindows/buttonSouth]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
-  m_DefaultActionMap: Player1
+  m_DefaultActionMap: 5fb58e73-e4cc-4b62-904b-ca25977b965f
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
---- !u!114 &2687092739190535633
+--- !u!114 &7628827022055132045
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7394123279773376107}
+  m_GameObject: {fileID: 3698094019892413943}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3c464a3992741844894237dbe76171c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerSetupMenuPrefab: {fileID: 486929121219766154, guid: fce66659b762e50459c2c3d689de7c2c, type: 3}
-  input: {fileID: 5819572854897651480}
+  playerSetupMenuPrefab: {fileID: 7666439747113261534, guid: 74a0b2ae4a0e2a94381bf03a58756ed4, type: 3}
+  input: {fileID: 3698094019892413940}

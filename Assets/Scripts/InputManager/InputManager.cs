@@ -22,8 +22,8 @@ public class InputManager : MonoBehaviour
     public void InitializePlayer(PlayerConfig conf)
     {
         playerConfig = conf;
-        playerMesh.material = playerConfig.PlayerMaterial;
-        playerConfig.Input.onActionTriggered += Input_onActionTriggered;
+        playerMesh.material = conf.PlayerMaterial;
+        conf.Input.onActionTriggered += Input_onActionTriggered;
     }
 
     private void Input_onActionTriggered(InputAction.CallbackContext obj)
