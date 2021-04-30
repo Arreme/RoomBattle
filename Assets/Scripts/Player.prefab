@@ -414,7 +414,7 @@ MonoBehaviour:
   _phy: {fileID: 5975971300749553940}
   _speed: 10
   _maxVel: 10
-  _rotateSpeed: 8
+  _rotateSpeed: 3
   _boosting: 0
   _boostTime: 0.23
   _boostMaxSpeed: 120

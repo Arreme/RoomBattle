@@ -51,9 +51,9 @@ public class RoombaController : MonoBehaviour
 
     void FixedUpdate()
     {
-        Debug.DrawLine(transform.position + Vector3.zero, transform.position + transform.up, Color.red);
-        Debug.DrawLine(transform.position + Vector3.zero, transform.position + new Vector3(_inputVector.x, _inputVector.y, 0), Color.green);
-        Debug.DrawLine(transform.position + Vector3.zero, transform.position + new Vector3(bisector(_inputVector, transform.up).x, bisector(_inputVector, transform.up).y), Color.blue);
+        Debug.DrawLine(transform.position + Vector3.zero, transform.position + transform.forward, Color.red);
+        Debug.DrawLine(transform.position + Vector3.zero, transform.position + new Vector3(_inputVector.x, 0, _inputVector.y), Color.green);
+        Debug.DrawLine(transform.position + Vector3.zero, transform.position + new Vector3(bisector(_inputVector, transform.forward).x, 0,bisector(_inputVector, transform.forward).y), Color.blue);
         _currentState = _currentState.runFrame(this);
 
         if (transform.childCount <= _nChildNoBalloons)
