@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class WeaponDetect : MonoBehaviour
 {
-    [SerializeField] private List<GameObject> ballon;
+    [SerializeField] public List<GameObject> ballon;
     [SerializeField] RoombaController _controller;
     private int count = 0;
 
