@@ -412,11 +412,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _inputVector: {x: 0, y: 0, z: 0}
   _phy: {fileID: 5975971300749553940}
-  _speed: 15
-  _maxVel: 15
+  _speed: 10
+  _maxVel: 10
   _rotateSpeed: 8
   _boosting: 0
-  _boostTime: 0.3
+  _boostTime: 0.23
   _boostMaxSpeed: 120
   _invincibilityTime: 2
   _runPUTime: 5
