@@ -21,5 +21,6 @@ public class WeaponDetect : MonoBehaviour
         Destroy(ballon[count]);
         count++;
         _controller.activateInvincibility();
+        
     }
 }
