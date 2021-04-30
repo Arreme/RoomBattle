@@ -84,6 +84,5 @@ public class CustomPhysics : MonoBehaviour
     void OnCollisionEnter(Collision collisionInfo)
     {
         Vector3 myCollisionNormal = collisionInfo.contacts[0].normal;
-        Debug.Log(myCollisionNormal);
     }
 }

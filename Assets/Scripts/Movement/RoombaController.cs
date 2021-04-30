@@ -5,6 +5,8 @@ public class RoombaController : MonoBehaviour
     [Header("Input")]
     public Vector3 _inputVector = Vector3.zero;
 
+    private BattleController _manager;
+
     public CustomPhysics _phy;
     [Header("Movement variables")]
     [SerializeField] private float _speed = 10f;
@@ -36,6 +38,8 @@ public class RoombaController : MonoBehaviour
 
     private void Start()
     {
+        _manager = FindObjectOfType<BattleController>();
+        _manager.AddPlayer(gameObject);
         _phy = gameObject.GetComponent<CustomPhysics>();
         _col = gameObject.GetComponent<SphereCollider>();
         _normalState = new NormalState(_speed, _maxVel, _rotateSpeed,_mesh);
@@ -86,6 +90,10 @@ public class RoombaController : MonoBehaviour
         _col.enabled = false;
         _mesh[1].material.color = Color.red;
         Invoke("revertInvincibility",_invincibilityTime);
+        Debug.Log("Hey");
+
+        _phy.addForce(new Vector2(transform.forward.x,transform.forward.z), 1000);
+        _manager.Explosion(gameObject);
     }
 
     private void revertInvincibility()
