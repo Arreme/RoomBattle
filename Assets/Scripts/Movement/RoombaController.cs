@@ -17,7 +17,7 @@ public class RoombaController : MonoBehaviour
     [SerializeField] private float _boostMaxSpeed = 40f;
 
     [Header("States")]
-    [SerializeField] private float _invincibilityTime = 2f;
+    [SerializeField] private float _invincibilityTime = 6f;
     [SerializeField] private float _runPUTime = 5f;
     [SerializeField] private float _runPUSpeedMultiplier = 2f;
     public bool _powerUp = false;
@@ -25,24 +25,24 @@ public class RoombaController : MonoBehaviour
 
     public BoostingState _boostingState;
     public NormalState _normalState;
-    public InvincibleState _invState;
 
     public RunPowerUpState _runPUState;
 
     public PowerUp _currentPowerUp;
 
     private int _nChildNoBalloons = 3;
+    [SerializeField] private MeshRenderer[] _mesh;
+    private SphereCollider _col;
 
     private void Start()
     {
         _phy = gameObject.GetComponent<CustomPhysics>();
-        MeshRenderer[] mesh = gameObject.GetComponentsInChildren<MeshRenderer>();
-        _normalState = new NormalState(_speed, _maxVel, _rotateSpeed,mesh);
-        _boostingState = new BoostingState(_boostTime,_boostMaxSpeed,mesh);
-        _invState = new InvincibleState(_invincibilityTime, _speed, _maxVel, _rotateSpeed,mesh);
-        _runPUState = new RunPowerUpState(_runPUTime, _speed *_runPUSpeedMultiplier, _rotateSpeed, mesh);
-        _currentPowerUp = new NoPowerUp();
+        _col = gameObject.GetComponent<SphereCollider>();
+        _normalState = new NormalState(_speed, _maxVel, _rotateSpeed,_mesh);
+        _boostingState = new BoostingState(_boostTime,_boostMaxSpeed,_mesh);
+        _runPUState = new RunPowerUpState(_runPUTime, _speed *_runPUSpeedMultiplier, _rotateSpeed, _mesh);
         _currentState = _normalState;
+        _currentPowerUp = new NoPowerUp();
     }
 
     void FixedUpdate()
@@ -83,6 +83,14 @@ public class RoombaController : MonoBehaviour
 
     public void activateInvincibility()
     {
-        _currentState = _invState;
+        _col.enabled = false;
+        _mesh[1].material.color = Color.red;
+        Invoke("revertInvincibility",_invincibilityTime);
+    }
+
+    private void revertInvincibility()
+    {
+        _col.enabled = true;
+        _mesh[1].material.color = Color.blue;
     }
 }

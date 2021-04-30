@@ -422,6 +422,9 @@ MonoBehaviour:
   _runPUTime: 5
   _runPUSpeedMultiplier: 2
   _powerUp: 0
+  _mesh:
+  - {fileID: 5975971299831827354}
+  - {fileID: 5975971300254160200}
 --- !u!114 &5975971300749553942
 MonoBehaviour:
   m_ObjectHideFlags: 0
